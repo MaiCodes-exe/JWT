@@ -8,6 +8,12 @@ class User(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
+
+    def set_token(self, token):
+        self.token = token
+        db.session.add(self)
+        db.session.commit()
+
     def __repr__(self):
         return '<User %r>' % self.username
 
