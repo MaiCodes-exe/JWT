@@ -7,12 +7,12 @@ export const LogIn = () => {
         <input
           placeholder="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
         ></input>
         <input
           placeholder="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
         ></input>
         <button onClick={handleClick}> Log in </button>
       </div>
