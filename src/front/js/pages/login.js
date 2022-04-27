@@ -19,6 +19,24 @@ export const LogIn = () => {
     setEmail(e.target.value);
   };
 
+  fetch(process.env.BACKEND_URL + `/api/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(opts),
+  })
+    .then((r) => r.json())
+    .then((token) => {
+      if (token.token) {
+        localStorage.setItem("token", token.token);
+        actions.setToken(token.token);
+        history.push("/");
+      } else {
+        console.log("Please type in correct email/password");
+      }
+    });
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };

@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       message: null,
-      api: "https://3000-ertip4geek-swauthenticat-5z0owhl85dg.ws-eu34xl.gitpod.io",
+      api: "https://3001-maicodesexe-jwt-7ue4lc3ae66.ws-eu42.gitpod.io",
     },
     actions: {
       login: (email, password) => {
