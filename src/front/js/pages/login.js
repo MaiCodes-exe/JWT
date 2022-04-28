@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { Component, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link, useHistory } from "react-router-dom";
 
@@ -6,56 +6,50 @@ export const LogIn = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  let history = useHistory();
+  const history = useHistory();
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      actions.setToken(localStorage.getItem("token"));
-      history.push("/");
-    }
-  }, []);
-
-  const handleEmailChange = (e) => {
+  const changeHandler = (e) => {
     setEmail(e.target.value);
   };
 
-  fetch(process.env.BACKEND_URL + `/api/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(opts),
-  })
-    .then((r) => r.json())
-    .then((token) => {
-      if (token.token) {
-        localStorage.setItem("token", token.token);
-        actions.setToken(token.token);
-        history.push("/");
-      } else {
-        console.log("Please type in correct email/password");
-      }
-    });
-
-  const handlePasswordChange = (e) => {
+  const changeHandlerPassword = (e) => {
     setPassword(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    actions.login(email, password);
+  };
+
+  if (store.token && store.token != "" && store.token != undefined)
+    history.push("/search");
   return (
     <div className="text-center mt-5">
       <h1> Login</h1>
       <div>
-        <input
-          placeholder="email"
-          value={email}
-          onChange={handleEmailChange}
-        ></input>
-        <input
-          placeholder="password"
-          value={password}
-          onChange={handlePasswordChange}
-        ></input>
-        <button onClick={handleClick}> Log in </button>
+        <form action="/action_page.php" id="ff" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="email">Email address:</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="pwd">Password:</label>
+            <input
+              type="password"
+              className="form-control"
+              id="pwd"
+              onChange={changeHandlerPassword}
+            />
+          </div>
+          <button type="submit" className="btn btn-default" id="ll">
+            Log in
+          </button>
+        </form>
       </div>
     </div>
   );

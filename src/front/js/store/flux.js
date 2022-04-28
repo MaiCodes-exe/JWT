@@ -1,8 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      message: null,
-      api: "https://3001-maicodesexe-jwt-7ue4lc3ae66.ws-eu42.gitpod.io",
+      // message: null,
+      token: null,
       demo: [
         {
           title: "FIRST",
@@ -17,98 +17,92 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
     },
     actions: {
+      setToken: () => {
+        setStore({ token: localStorage.getItem("token") });
+      },
       // Use getActions to call a function within a fuction
-      exampleFunction: () => {
-        getActions().changeColor(0, "green");
-      },
+      // exampleFunction: () => {
+      //   getActions().changeColor(0, "green");
+      // },
 
-      getMessage: () => {
-        // fetching data from the backend
-        fetch(process.env.BACKEND_URL + "/api/hello")
-          .then((resp) => resp.json())
-          .then((data) => setStore({ message: data.message }))
-          .catch((error) =>
-            console.log("Error loading message from backend", error)
-          );
-      },
-      changeColor: (index, color) => {
-        //get the store
-        const store = getStore();
+      // getMessage: () => {
+      //   // fetching data from the backend
+      //   fetch(process.env.BACKEND_URL + "/api/hello")
+      //     .then((resp) => resp.json())
+      //     .then((data) => setStore({ message: data.message }))
+      //     .catch((error) =>
+      //       console.log("Error loading message from backend", error)
+      //     );
+      // },
+      // changeColor: (index, color) => {
+      //   //get the store
+      //   const store = getStore();
 
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
+      //   //we have to loop the entire demo array to look for the respective index
+      //   //and change its color
+      //   const demo = store.demo.map((elm, i) => {
+      //     if (i === index) elm.background = color;
+      //     return elm;
+      //   });
+
+      //   //reset the global store
+      //   setStore({ demo: demo });
+      // },
+      //SIGN UP
+      signUp: (data) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          "First name": `${data["First name"]}`,
+          "Last name": `${data["Last name"]}`,
+          Email: `${data["Email"]}`,
+          Password: `${data["Password"]}`,
         });
-        login: (email, password) => {
-          const store = getStore();
-          fetch(`${store.api}/api/login`, {
-            method: "POST",
-            body: JSON.stringify({
-              email: email,
-              password: password,
-            }),
-            headers: {
-              "Content-type": "application/json",
-            },
-          })
-            .then((resp) => {
-              if (resp.ok) {
-                return resp.json();
-              }
-            })
-            .then((data) => {
-              localStorage.setItem("token", data.token);
-              setStore({ isAuthenticate: true });
-            })
-            .catch((error) => console.error("[ERROR IN LOGIN]", error));
-        },
-          signup;
-        (email, password, roles) => {
-          // const store = getStore();
-          fetch(process.env.BACKEND_URL + `/api/signup`, {
-            method: "POST",
-            body: JSON.stringify({
-              email: email,
-              password: password,
-              roles: roles,
-            }),
-            headers: {
-              "Content-type": "application/json",
-            },
-          })
-            .then((resp) => {
-              console.log(resp);
-              if (resp.ok) {
-                console.log(resp);
-                return resp.json();
-              }
-            })
-            .then((data) => {
-              console.log(data);
-              localStorage.setItem("token", data.token);
-              setStore({ isAuthenticate: true });
-            })
-            .catch((error) => console.error("[ERROR IN LOGIN]", error));
-        },
-          setToken;
-        (token) => {
-          setStore({ token: token });
-        },
-          syncTokenFromSessionStore;
-        () => {
-          const token = localStorage.getItem("token");
-          if (token && token != "" && token != undefined)
-            setStore({ token: token });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
         };
-        logout: () => {
-          localStorage.removeItem("token");
-          console.log("Logout");
-          setStore({ token: null });
-        },
-          //reset the global store
-          setStore({ demo: demo });
+
+        fetch(`${process.env.BACKEND_URL}/signup`, requestOptions)
+          .then((response) => response.json())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      },
+
+      //LOG IN
+      login: (email, password) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          email: email,
+          password: password,
+        });
+
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(`${process.env.BACKEND_URL}/login`, requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            setStore({ token: result.token });
+            localStorage.setItem("token", result.token);
+          })
+          .catch((error) => console.log("error", error));
+      },
+
+      //LOG OUT
+      logout: () => {
+        sessionStorage.removeItem("token");
+        setStore({ token: null });
       },
     },
   };
