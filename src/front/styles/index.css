@@ -1,3 +1,47 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+#ll {
+  background-color: blueviolet;
+  margin: 30px;
+}
+#lo {
+  width: 50%;
+  margin-left: 25%;
+  background-color: antiquewhite;
+}
+
+#box {
+  width: 20%;
+  height: 70%;
+  margin-left: 40%;
+  background-color: antiquewhite;
+}
+
+#input1 {
+  width: 90%;
+  margin-top: 15px;
+}
+#input2 {
+  width: 90%;
+
+  margin-top: 15px;
+}
+#input3 {
+  width: 90%;
+
+  margin-top: 15px;
+}
+#input4 {
+  width: 90%;
+
+  margin-top: 15px;
+
+  margin-left: 5px;
+}
+#bb {
+  margin-top: 20px;
+  background-color: black;
+  color: white;
+  margin-bottom: 10px;
+}

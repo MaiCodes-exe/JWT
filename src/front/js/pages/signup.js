@@ -44,14 +44,16 @@ export const SignUp = () => {
           {...register("Password", { required: true, maxLength: 40 })}
           id="input4"
         />
-        <button
-          type="submit"
-          className="btn btn-default"
-          id="bb"
-          onClick={newSign}
-        >
-          Sign Up
-        </button>
+        <div>
+          <button
+            type="submit"
+            className="btn btn-default"
+            id="bb"
+            onClick={newSign}
+          >
+            Sign Up
+          </button>
+        </div>
       </form>
     </div>
   );

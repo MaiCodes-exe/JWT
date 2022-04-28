@@ -26,7 +26,7 @@ export const LogIn = () => {
   return (
     <div className="text-center mt-5">
       <h1> Login</h1>
-      <div>
+      <div id="lo">
         <form action="/action_page.php" id="ff" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email address:</label>
