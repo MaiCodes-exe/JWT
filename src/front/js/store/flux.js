@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           redirect: "follow",
         };
 
-        fetch(`${process.env.BACKEND_URL}/signup`, requestOptions)
+        fetch(`${BACKEND_URL}/signup`, requestOptions)
           .then((response) => response.json())
           .then((result) => console.log(result))
           .catch((error) => console.log("error", error));
@@ -90,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           redirect: "follow",
         };
 
-        fetch(`${process.env.BACKEND_URL}/login`, requestOptions)
+        fetch(`${BACKEND_URL}/login`, requestOptions)
           .then((response) => response.json())
           .then((result) => {
             setStore({ token: result.token });
