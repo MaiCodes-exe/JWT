@@ -13,25 +13,11 @@ export const SignUp = () => {
   const onSubmit = (data) => {
     actions.signUp(data);
   };
-  const newSign = () => {
-    return alert("Thank your signing up");
-  };
+
   return (
     <div className="text-center mt-5">
       <h1>Signup</h1>
       <form onSubmit={handleSubmit(onSubmit)} id="box">
-        <input
-          type="text"
-          placeholder="First name"
-          {...register("First name", { required: true, maxLength: 80 })}
-          id="input1"
-        />
-        <input
-          type="text"
-          placeholder="Last name"
-          {...register("Last name", { required: true, maxLength: 100 })}
-          id="input2"
-        />
         <input
           type="text"
           placeholder="Email"
@@ -45,12 +31,7 @@ export const SignUp = () => {
           id="input4"
         />
         <div>
-          <button
-            type="submit"
-            className="btn btn-default"
-            id="bb"
-            onClick={newSign}
-          >
+          <button type="submit" className="btn btn-default" id="bb">
             Sign Up
           </button>
         </div>
