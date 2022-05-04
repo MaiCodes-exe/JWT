@@ -50,6 +50,10 @@ export const LogIn = () => {
             Log in
           </button>
         </form>
+        <span>
+          You do not have an account? Click here to
+          <Link to="/signup"> sign up</Link>
+        </span>
       </div>
     </div>
   );
