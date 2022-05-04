@@ -2,6 +2,7 @@ import React, { Component, useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useForm } from "react-hook-form";
 import "../../styles/home.css";
+import { Link, useHistory } from "react-router-dom";
 
 export const SignUp = () => {
   const { store, actions } = useContext(Context);
@@ -36,6 +37,10 @@ export const SignUp = () => {
           </button>
         </div>
       </form>
+      <span>
+        Already have an account? Click here to
+        <Link to="/login"> log in</Link>
+      </span>
     </div>
   );
 };
