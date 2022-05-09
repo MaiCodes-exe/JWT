@@ -26,9 +26,8 @@ def handle_hello():
 
 @api.route('/signup', methods=['POST'])
 def create_user():
-    email = request.json.get('email', None)
-    print(email) 
-    password = request.json.get('password', None)
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
     password_hash = generate_password_hash(password)
 
     user = User(

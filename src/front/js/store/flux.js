@@ -66,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         fetch(
-          `https://3001-maicodesexe-jwt-7ue4lc3ae66.ws-eu43.gitpod.io/signup`,
+          `https://3001-maicodesexe-jwt-5gb2tp13vnm.ws-eu44.gitpod.io/api/signup`,
           requestOptions
         )
           .then((response) => response.json())
@@ -92,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
 
         fetch(
-          `https://3001-maicodesexe-jwt-7ue4lc3ae66.ws-eu43.gitpod.io/login`,
+          `https://3001-maicodesexe-jwt-5gb2tp13vnm.ws-eu44.gitpod.io/api/login`,
           requestOptions
         )
           .then((response) => response.json())
