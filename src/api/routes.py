@@ -64,11 +64,10 @@ def login():
 
 
 
-
-# @api.route("/protected", methods=["GET"])
-# @jwt_required()
-# def protected():
-#     # Access the identity of the current user with get_jwt_identity
-#     current_user_id = get_jwt_identity()
-#     user = User.filter.get(current_user_id)
-#     return jsonify({"id": user.id, "email": user.email}), 200
+@api.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user_id = get_jwt_identity()
+    user = User.filter.get(current_user_id)
+    return jsonify({"id": user.id, "email": user.email}), 200
