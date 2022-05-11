@@ -65,10 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           redirect: "follow",
         };
 
-        fetch(
-          `https://3001-maicodesexe-jwt-5gb2tp13vnm.ws-eu44.gitpod.io/api/signup`,
-          requestOptions
-        )
+        fetch(`${process.env.BACKEND_URL}/api/signup`, requestOptions)
           .then((response) => response.json())
           .then((result) => console.log(result))
           .catch((error) => console.log("error", error));
@@ -80,8 +77,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-          email: email,
-          password: password,
+          Email: email,
+          Password: password,
         });
 
         var requestOptions = {
@@ -91,10 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           redirect: "follow",
         };
 
-        fetch(
-          `https://3001-maicodesexe-jwt-5gb2tp13vnm.ws-eu44.gitpod.io/api/login`,
-          requestOptions
-        )
+        fetch(`${process.env.BACKEND_URL}/api/login`, requestOptions)
           .then((response) => response.json())
           .then((result) => {
             setStore({ token: result.token });

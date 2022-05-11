@@ -22,7 +22,7 @@ export const LogIn = () => {
   };
 
   if (store.token && store.token != "" && store.token != undefined)
-    history.push("/search");
+    history.push("/private");
   return (
     <div className="text-center mt-5">
       <h1> Login</h1>

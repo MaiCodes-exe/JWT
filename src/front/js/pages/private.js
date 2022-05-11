@@ -7,7 +7,7 @@ export const Private = () => {
 
   return (
     <div className="text-center mt-5">
-      {store.token ? "Welcome" : "You are not logged in"}
+      <h1> Welcome</h1>
     </div>
   );
 };

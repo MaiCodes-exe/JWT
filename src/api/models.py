@@ -5,16 +5,16 @@ db = SQLAlchemy()
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
+    password = db.Column(db.String(380), unique=False, nullable=False)
 
 
-    def set_token(self, token):
-        self.token = token
-        db.session.add(self)
-        db.session.commit()
+    # def set_token(self, token):
+    #     self.token = token
+    #     db.session.add(self)
+    #     db.session.commit()
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.email
 
     def serialize(self):
         return {

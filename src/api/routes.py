@@ -26,34 +26,40 @@ def handle_hello():
 
 @api.route('/signup', methods=['POST'])
 def create_user():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
-    password_hash = generate_password_hash(password)
+    # email = request.json.get("Email", None)
+    # password = request.json.get("Password", None)
+    request_data = request.get_json()
+
+    password_hash = generate_password_hash(request_data['Password'])
 
     user = User(
-        email = email,
+        email = request_data['Email'],
         password = password_hash
     )
-    return"<h1> received </h1>"
+    db.session.add(user)
+    db.session.commit()
+    return jsonify(user.serialize())
 
 
 # ##login
 
-# @api.route("/login", methods=["POST"])
-# def login():
-#     email = request.json.get("email")
-#     password = request.json.get("password")
+@api.route("/login", methods=["POST"])
+def login():
+    email = request.json.get("Email")
+    password = request.json.get("Password")
 
-#     if not (email and password):
-#         return jsonify({"error": "Email or password missing"}), 401
-
-#     if user and check_password_hash(user.password, password):
-#         access_token = create_access_token(identity=User.id())
-#         return jsonify({'token' : access_token}), 200
-#     return {'error': 'user not found'}, 404
-    # access_token = create_access_token(identity=create_user.serialize())
-    # # return jsonify(user.serialize())
-    # return jsonify({'token' : access_token}), 200
+    if not (email and password):
+        return jsonify({"error": "Email or password missing"}), 401
+    user = User.query.filter_by(email= email).first()
+    print(user)
+    hash_password = generate_password_hash(password)
+    if user and check_password_hash(user.password, hash_password):
+        access_token = create_access_token(identity=User.id())
+        return jsonify({'token' : access_token}), 200
+    # return {'error': 'user not found'}, 404
+    access_token = create_access_token(identity= user.serialize())
+    # return jsonify(user.serialize())
+    return jsonify({'token' : access_token}), 200
 
 
 
